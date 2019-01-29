@@ -13,6 +13,7 @@ repositories {
 }
 
 dependencies {
+    compile(files("./../libs/SmartCitiesAPI_20190128.jar"))
     compile(kotlin("stdlib", Versions.kotlin))
     implementation(Libs.coroutines)
     implementation(Libs.serialization)
@@ -24,6 +25,7 @@ dependencies {
         implementation(it)
     }
     implementation(Libs.klog)
+    implementation(Libs.json)
     implementation(project(":blockchain"))
     Libs.slf4j.forEach {
         runtimeOnly(it)

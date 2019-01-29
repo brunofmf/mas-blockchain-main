@@ -14,6 +14,7 @@ object Versions {
     val orientDB = "3.0.7"
     val slf4j = "1.8.0-beta2"
     val serial = "0.9.1"
+    val json = "20180813"
 }
 
 object Libs {
@@ -158,5 +159,11 @@ object Libs {
             "name" to "orientdb-server",
             "version" to Versions.orientDB
         )
+    )
+
+    val json = mapOf(
+            "group" to "org.json",
+            "name" to "json",
+            "version" to Versions.json
     )
 }
