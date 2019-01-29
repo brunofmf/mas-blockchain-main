@@ -20,6 +20,12 @@ class SideChain(
     val blockChainId: Hash
 ) : Storable, BlockChainContract {
 
+    init {
+        pw.registerDefaultClusters(
+                blockChainId
+        )
+    }
+
     @Transient
     private var cache: RingBuffer<Block> = RingBuffer(BlockChain.CACHE_SIZE)
 
