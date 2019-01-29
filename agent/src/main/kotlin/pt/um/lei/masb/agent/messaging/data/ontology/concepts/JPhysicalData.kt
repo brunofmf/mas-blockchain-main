@@ -1,4 +1,4 @@
-package pt.um.lei.masb.agent.messaging.transaction.ontology.concepts
+package pt.um.lei.masb.agent.messaging.data.ontology.concepts
 
 import jade.content.Concept
 

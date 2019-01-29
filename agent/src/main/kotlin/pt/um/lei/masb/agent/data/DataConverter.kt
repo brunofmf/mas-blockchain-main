@@ -9,7 +9,7 @@ import pt.um.lei.masb.agent.messaging.block.ontology.concepts.JBlockHeader
 import pt.um.lei.masb.agent.messaging.block.ontology.concepts.JCoinbase
 import pt.um.lei.masb.agent.messaging.block.ontology.concepts.JMerkleTree
 import pt.um.lei.masb.agent.messaging.block.ontology.concepts.JTransactionOutput
-import pt.um.lei.masb.agent.messaging.transaction.ontology.concepts.JPhysicalData
+import pt.um.lei.masb.agent.messaging.data.ontology.concepts.JPhysicalData
 import pt.um.lei.masb.agent.messaging.transaction.ontology.concepts.JTransaction
 import pt.um.lei.masb.blockchain.Block
 import pt.um.lei.masb.blockchain.BlockChainId
@@ -196,10 +196,10 @@ fun convertToJadePhysicalData(data: PhysicalData): JPhysicalData {
         it.writeObject(data.data)
     }
     return JPhysicalData(
-        base64encode(byteStream.toByteArray()),
-        data.instant.toString(),
-        data.geoCoords?.latitude.toString(),
-        data.geoCoords?.longitude.toString()
+            base64encode(byteStream.toByteArray()),
+            data.instant.toString(),
+            data.geoCoords?.latitude.toString(),
+            data.geoCoords?.longitude.toString()
     )
 }
 

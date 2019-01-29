@@ -9,5 +9,8 @@ object BlockOntology : BeanOntology("JBlock-Ontology", BasicOntology.getInstance
 
     init {
         add("pt.um.lei.masb.agent.messaging.block")
+        add("pt.um.lei.masb.agent.messaging.block.ontology.actions")
+        add("pt.um.lei.masb.agent.messaging.block.ontology.concepts")
+        add("pt.um.lei.masb.agent.messaging.block.ontology.predicates")
     }
 }
