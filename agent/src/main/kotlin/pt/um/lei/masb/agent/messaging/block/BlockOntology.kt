@@ -8,6 +8,6 @@ object BlockOntology : BeanOntology("JBlock-Ontology", BasicOntology.getInstance
     const val ONTOLOGY_NAME = "JBlock-Ontology"
 
     init {
-        add("pt.um.lei.masb.agent.messaging.block.ontology")
+        add("pt.um.lei.masb.agent.messaging.block")
     }
 }

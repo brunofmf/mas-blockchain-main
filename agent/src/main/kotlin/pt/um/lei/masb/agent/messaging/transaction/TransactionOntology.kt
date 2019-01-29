@@ -12,6 +12,6 @@ object TransactionOntology : BeanOntology(
 
     init {
         //Ontology made up of all the transaction classes.
-        add("pt.um.lei.masb.agent.messaging.transaction.ontology")
+        add("pt.um.lei.masb.agent.messaging.transaction")
     }
 }
