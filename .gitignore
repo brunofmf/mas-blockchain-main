@@ -1,7 +1,12 @@
 # Created by .ignore support plugin (hsz.mobi)
 ### Gradle template
 .gradle
-/build/
+/build/*
+/agent/build/*
+/agent/ui/*
+/blockchain/build/*
+/buildSrc/build/*
+/db/*
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -45,3 +50,6 @@ hs_err_pid*
 # Ignore Jade Run Stuff
 /agent/APDescription.txt
 /agent/MTPs-Container.txt
+MTPs-TheMainContainer.txt
+MTPs-Main-Container.txt
+APDescription.txt
