@@ -7,6 +7,7 @@ import jade.wrapper.ContainerController
 import mu.KLogging
 import pt.um.lei.masb.blockchain.BlockChain
 import pt.um.lei.masb.blockchain.SideChain
+import pt.um.lei.masb.blockchain.data.PollutionOWM
 import pt.um.lei.masb.blockchain.data.TemperatureData
 import pt.um.lei.masb.blockchain.emptyHash
 
@@ -89,7 +90,7 @@ class Container {
             val a = Container()
             val bc = BlockChain.getBlockChainByHash(hash = emptyHash()) ?: BlockChain(id = "smarthub")
 
-            val sc = bc.registerSideChainOf(TemperatureData::class.java).getSideChainOf(TemperatureData::class.java)
+            val sc = bc.registerSideChainOf(PollutionOWM::class.java).getSideChainOf(PollutionOWM::class.java)
                     ?: throw ClassNotFoundException("SideChain failed to be materialized")
 
             //Init Main Container
@@ -105,19 +106,19 @@ class Container {
                 "9889",
                 "LedgerContainer_1"
             )
-
+/*
             val ld2 = a.initContainerInPlatform(
                 "localhost",
                 "9890",
                 "LedgerContainer_2"
             )
-
+*/
             val ld3 = a.initContainerInPlatform(
                 "localhost",
                 "9891",
                 "LedgerContainer_3"
             )
-
+/*
             val ld4 = a.initContainerInPlatform(
                 "localhost",
                 "9892",
@@ -129,7 +130,7 @@ class Container {
                 "9893",
                 "LedgerContainer_5"
             )
-
+*/
             //Init Ledger Agents
             a.startAEInPlatform(
                 ld1,
@@ -137,21 +138,21 @@ class Container {
                 "pt.um.lei.masb.agent.SingleChainAgent",
                 sc
             )
-
+/*
             a.startAEInPlatform(
                 ld2,
                 "Ld2",
                 "pt.um.lei.masb.agent.SingleChainAgent",
                 sc
             )
-
+*/
             a.startAEInPlatform(
                 ld3,
                 "Ld3",
                 "pt.um.lei.masb.agent.SingleChainAgent",
                 sc
             )
-
+/*
             a.startAEInPlatform(
                 ld4,
                 "Ld4",
@@ -165,29 +166,29 @@ class Container {
                 "pt.um.lei.masb.agent.SingleChainAgent",
                 sc
             )
-
+*/
             //Init Slave Agents in Ledger Containers
             a.startSlaveAgentInPlatform(
                 ld1,
-                "Ld1_SlaveAgent_Uv_BragaLd1",
+                "Ld1_SlaveAgent_Uv_Braga",
                 "pt.um.lei.masb.agent.SlaveAgent",
                 arrayOf("10000", "UV", "41.54", "-8.43")
             )
-
+/*
             a.startSlaveAgentInPlatform(
                 ld2,
                 "Ld2_SlaveAgent_Uv_Guimaraes",
                 "pt.um.lei.masb.agent.SlaveAgent",
                 arrayOf("10000", "UV", "41.44", "-8.29")
             )
-
+*/
             a.startSlaveAgentInPlatform(
                 ld3,
                 "Ld3_SlaveAgent_Traffic_Braga",
                 "pt.um.lei.masb.agent.SlaveAgent",
                 arrayOf("10000", "TRAFFIC", "41.506531", "-8.451247", "41.574115", "-8.371253")
             )
-
+/*
             a.startSlaveAgentInPlatform(
                 ld4,
                 "Ld4_SlaveAgent_Uv_Guimaraes",
@@ -208,7 +209,7 @@ class Container {
                 "pt.um.lei.masb.agent.SlaveAgent",
                 arrayOf("10000", "TRAFFIC", "41.506531", "-8.451247", "41.574115", "-8.371253")
             )
-
+*/
         }
     }
 

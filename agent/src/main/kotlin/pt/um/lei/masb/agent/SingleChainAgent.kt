@@ -6,13 +6,12 @@ import jade.domain.DFService
 import jade.domain.FIPAAgentManagement.DFAgentDescription
 import jade.domain.FIPAException
 import mu.KLogging
-import pt.um.lei.masb.agent.behaviours.CaptureData
 import pt.um.lei.masb.agent.behaviours.GetMissingBlocks
 import pt.um.lei.masb.agent.behaviours.Mining
-import pt.um.lei.masb.agent.behaviours.ReceiveMessages
 import pt.um.lei.masb.agent.behaviours.SendMessages
 import pt.um.lei.masb.agent.data.AgentPeers
 import pt.um.lei.masb.blockchain.*
+import pt.um.lei.masb.blockchain.data.PollutionOWM
 import pt.um.lei.masb.blockchain.data.TemperatureData
 import pt.um.lei.masb.blockchain.utils.RingBuffer
 import java.util.*
@@ -57,10 +56,10 @@ class SingleChainAgent : Agent() {
             }
         }
 
-        b.addSubBehaviour(GetMissingBlocks(sc, agentPeers))
+        //b.addSubBehaviour(GetMissingBlocks(sc, agentPeers))
         //b.addSubBehaviour(ReceiveMessages(sc, agentPeers, TemperatureData::class.java))
-        b.addSubBehaviour(Mining(sc, bl))
-        b.addSubBehaviour(SendMessages(sc, toSend, agentPeers, TemperatureData::class.java))
+        //b.addSubBehaviour(Mining(sc, bl))
+        b.addSubBehaviour(SendMessages(sc, toSend, agentPeers, PollutionOWM::class.java))
         addBehaviour(b)
     }
 
