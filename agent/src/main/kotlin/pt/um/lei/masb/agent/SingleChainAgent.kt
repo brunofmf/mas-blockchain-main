@@ -12,11 +12,8 @@ import pt.um.lei.masb.agent.behaviours.Mining
 import pt.um.lei.masb.agent.behaviours.ReceiveMessages
 import pt.um.lei.masb.agent.behaviours.SendMessages
 import pt.um.lei.masb.agent.data.AgentPeers
-import pt.um.lei.masb.blockchain.Block
-import pt.um.lei.masb.blockchain.BlockChain
-import pt.um.lei.masb.blockchain.Ident
-import pt.um.lei.masb.blockchain.Transaction
-import pt.um.lei.masb.blockchain.data.BlockChainData
+import pt.um.lei.masb.blockchain.*
+import pt.um.lei.masb.blockchain.data.TemperatureData
 import pt.um.lei.masb.blockchain.utils.RingBuffer
 import java.util.*
 
@@ -26,12 +23,11 @@ class SingleChainAgent : Agent() {
     //agent will try maximizing reward
     //sessionRewards could later be translated into user reward
     private var sessionRewards: Double = 0.toDouble()
-    private val bc: BlockChain = arguments[0] as BlockChain
     private var bl: Queue<Block> = ArrayDeque<Block>(6)
     private val toSend: RingBuffer<Transaction> = RingBuffer(3)
-    private val agentPeers = AgentPeers(this)
 
     override fun setup() {
+        val sc = arguments[0] as SideChain
         val dfd = DFAgentDescription()
         dfd.name = aid
         try {
@@ -40,14 +36,19 @@ class SingleChainAgent : Agent() {
             logger.error(fe) {}
         }
 
+        val agentPeers = AgentPeers(this)
+
         val i = Ident
         sessionRewards = 0.0
 
+
+        /*val sc = bc.getSideChainOf(cl)
         val cl = arguments[1] as Class<out BlockChainData>
         val sc = bc.getSideChainOf(cl)
             ?: bc.registerSideChainOf(cl, arguments[2] as String)
                 .getSideChainOf(cl)
             ?: throw ClassNotFoundException("SideChain failed to be materialized")
+        */
 
         val b = object : ParallelBehaviour(this, ParallelBehaviour.WHEN_ALL) {
             override fun onEnd(): Int {
@@ -55,11 +56,11 @@ class SingleChainAgent : Agent() {
                 return 0
             }
         }
+
         b.addSubBehaviour(GetMissingBlocks(sc, agentPeers))
-        b.addSubBehaviour(ReceiveMessages(sc, agentPeers, cl))
-        b.addSubBehaviour(CaptureData(sc, i, bl, toSend))
+        //b.addSubBehaviour(ReceiveMessages(sc, agentPeers, TemperatureData::class.java))
         b.addSubBehaviour(Mining(sc, bl))
-        b.addSubBehaviour(SendMessages(sc, toSend, agentPeers, cl))
+        b.addSubBehaviour(SendMessages(sc, toSend, agentPeers, TemperatureData::class.java))
         addBehaviour(b)
     }
 

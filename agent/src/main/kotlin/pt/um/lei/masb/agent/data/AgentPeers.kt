@@ -15,6 +15,7 @@ data class AgentPeers(
     init {
         if (ledgerPeers.isEmpty()) {
             val dfd = DFAgentDescription()
+            dfd.name = agent.aid
             val agents = DFService.search(agent, dfd)
             agents.asSequence().map { it.name }.toCollection(ledgerPeers)
         }
