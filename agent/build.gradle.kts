@@ -13,7 +13,7 @@ repositories {
 }
 
 dependencies {
-    compile(files("./../libs/SmartCitiesAPI_20190128.jar"))
+    compile(files("./../libs/SmartCitiesAPI_20190129.jar"))
     compile(kotlin("stdlib", Versions.kotlin))
     implementation(Libs.coroutines)
     implementation(Libs.serialization)
